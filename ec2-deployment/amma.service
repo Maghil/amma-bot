@@ -4,13 +4,13 @@ After=network.target
 
 [Service]
 Type=simple
+WorkingDirectory=home/ubuntu/amma-bot/
 ExecStart=/bin/bash /home/ubuntu/amma-bot/ec2-deployment/start.sh
 ExecStop=/bin/bash /home/ubuntu/amma-bot/ec2-deployment/stop.sh
 Restart=always
-RestartSec=5
-TimeoutSec=60
-RuntimeMaxSec=infinity
-PIDFile=/tmp/amma.pid
+StandardOutput=inherit
+StandardError=inherit
+User=user
 
 [Install]
 WantedBy=multi-user.target
