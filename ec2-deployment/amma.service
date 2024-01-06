@@ -10,7 +10,7 @@ Restart=always
 RestartSec=5
 TimeoutSec=60
 RuntimeMaxSec=infinity
-PIDFile=/tmp/name_script.pid
+PIDFile=/tmp/amma.pid
 
 [Install]
 WantedBy=multi-user.target
