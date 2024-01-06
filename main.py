@@ -29,6 +29,5 @@ async def on_message(message):
     #advice
 
     #replies
-    #phone
 
 client.run(TOKEN)
