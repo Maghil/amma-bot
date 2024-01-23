@@ -13,7 +13,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: ./*
-          remote_path: /var/www/my-app/
+          remote_path: /home/ubuntu/amma-bot
           remote_host: 3.110.33.15
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
