@@ -24,7 +24,7 @@ jobs:
       - name: restart-service
         uses: JimCronqvist/action-ssh@1.0.0
         with:
-          hosts: ${{ secrets.HOST_IP }}
+          hosts: ubuntu@${{ secrets.HOST_IP }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
           command: |
             sudo systemctl daemon-reload
