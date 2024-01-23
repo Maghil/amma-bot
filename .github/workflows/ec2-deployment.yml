@@ -21,3 +21,6 @@ jobs:
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
 
+      - run: sudo systemctl daemon-reload
+
+
