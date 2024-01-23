@@ -20,9 +20,14 @@ jobs:
           remote_host: "${{ secrets.HOST_IP }}"
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-        #   rsh: sudo systemctl restart amma
 
-      - run: sudo systemctl daemon-reload
-      - run: sudo systemctl restart amma
+      - name: restart-service
+        uses: JimCronqvist/action-ssh@1.0.0
+        with:
+          hosts: ${{ secrets.HOST_IP }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          command: |
+            sudo systemctl daemon-reload
+            sudo systemctl restart amma
 
 
