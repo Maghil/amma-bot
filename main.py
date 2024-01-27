@@ -51,7 +51,7 @@ async def on_message(message):
     description="My first application Command",
     guild=discord.Object(id=843816309791391784)
 )
-async def first_command(interaction):
+async def first_command(interaction,arg1):
     await interaction.response.send_message("Hello!")
 
 if __name__ == "__main__":
