@@ -1,4 +1,3 @@
-reply to slurs
 reply to kys
 reply to kms
 
@@ -6,6 +5,8 @@ reply to kms
 1. phone use panratha niruthu
 
 # DEPLOYMENT
+## RUNNING LOCALLY
+1. just run main.py duh :dontcry:
 
 ## SIMPLE EC2
 1. uses systemd
