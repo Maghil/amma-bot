@@ -21,8 +21,14 @@ class MyClient(discord.Client):
     # syncing commands
     # remove guild to sync all
     async def setup_hook(self):
-        self.tree.copy_global_to(guild=MY_GUILD)
-        await self.tree.sync(guild=MY_GUILD)
+        ### FOR LOCAL TESTING
+        # self.tree.copy_global_to(guild=MY_GUILD)
+        # await self.tree.sync(guild=MY_GUILD)
+
+        ### FOR PROD
+        self.tree.copy_global_to()
+        await self.tree.sync()
+        
 
 
 intents = discord.Intents(messages=True, message_content=True)
