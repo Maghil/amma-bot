@@ -26,9 +26,7 @@ class MyClient(discord.Client):
         # await self.tree.sync(guild=MY_GUILD)
 
         ### FOR PROD
-        self.tree.copy_global_to()
         await self.tree.sync()
-        
 
 
 intents = discord.Intents(messages=True, message_content=True)
