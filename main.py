@@ -17,6 +17,8 @@ class MyClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
+        with open("data/list.json", "r") as file:
+            self.response_list = json.load(file)
 
     # syncing commands
     # remove guild to sync all
@@ -42,45 +44,34 @@ async def on_message(message):
     if message.author == client.user:
         pass
 
-    # if need to converse with dad bot
+    # converse with dad bot
     if message.author.id == 503720029456695306:
+
         if message.content.startswith("Hi"):
-            with open("data/list.json", "r") as file:
-                json_object = json.load(file)
-            im_response = json_object["im_responese"]
+            im_response = client.response_list["im_responese"]
             await message.channel.send(random.choice(im_response))
 
-    # replies
+    # replies to users
     if message.content.find("dead") > -1 and (message.content.find("server") > -1 or (message.content.find("chat") > -1)):
         await message.channel.send("poi vellaya paaru")
 
     for i in ["niga", "nigga", "niggaz", "niggers", "nigger", "snigger", "retard"]:
         if message.content.find(i) > -1:
-            with open("data/list.json", "r") as file:
-                json_object = json.load(file)
-            slur_response = json_object["slur_response"]
+            slur_response = client.response_list["slur_response"]
             await message.channel.send(random.choice(slur_response))
 
     if message.content.find("boomer") > -1:
-        with open("data/list.json", "r") as file:
-            json_object = json.load(file)
-        boomer_response = json_object["boomer_response"]
+        boomer_response = client.response_list["boomer_response"]
         await message.channel.send(random.choice(boomer_response))
 
-    if re.search(GOODBYE_MATCH,message.content,re.IGNORECASE):
-        with open("data/list.json", "r") as file:
-            json_object = json.load(file)
-        bye_response = json_object["bye_response"]
+    if re.search(GOODBYE_MATCH, message.content, re.IGNORECASE):
+        bye_response = client.response_list["bye_response"]
         await message.channel.send(random.choice(bye_response))
-
-# Commands
 
 
 @client.tree.command()
 async def advice(interaction: discord.Integration):
-    with open("data/list.json", "r") as file:
-        json_object = json.load(file)
-    advice = json_object["advice"]
+    advice = client.response_list["advice"]
     await interaction.response.send_message(random.choice(advice))
 
 
