@@ -48,31 +48,27 @@ async def on_message(message):
     if message.author.id == 503720029456695306:
 
         if message.content.startswith("Hi"):
-            im_response = client.response_list["im_responese"]
-            await message.channel.send(random.choice(im_response))
+            await message.channel.send(random.choice(client.response_list["im_responese"]))
 
     # replies to users
-    if message.content.find("dead") > -1 and (message.content.find("server") > -1 or (message.content.find("chat") > -1)):
-        await message.channel.send("poi vellaya paaru")
+    else:
+        if message.content.find("dead") > -1 and (message.content.find("server") > -1 or (message.content.find("chat") > -1)):
+            await message.channel.send("poi vellaya paaru")
 
-    for i in ["niga", "nigga", "niggaz", "niggers", "nigger", "snigger", "retard"]:
-        if message.content.find(i) > -1:
-            slur_response = client.response_list["slur_response"]
-            await message.channel.send(random.choice(slur_response))
+        for i in ["niga", "nigga", "niggaz", "niggers", "nigger", "snigger", "retard"]:
+            if message.content.find(i) > -1:
+                await message.channel.send(random.choice(client.response_list["slur_response"]))
 
-    if message.content.find("boomer") > -1:
-        boomer_response = client.response_list["boomer_response"]
-        await message.channel.send(random.choice(boomer_response))
+        if message.content.find("boomer") > -1:
+            await message.channel.send(random.choice(client.response_list["boomer_response"]))
 
-    if re.search(GOODBYE_MATCH, message.content, re.IGNORECASE):
-        bye_response = client.response_list["bye_response"]
-        await message.channel.send(random.choice(bye_response))
+        if re.search(GOODBYE_MATCH, message.content, re.IGNORECASE):
+            await message.channel.send(random.choice(client.response_list["bye_response"]))
 
 
 @client.tree.command()
 async def advice(interaction: discord.Integration):
-    advice = client.response_list["advice"]
-    await interaction.response.send_message(random.choice(advice))
+    await interaction.response.send_message(random.choice(client.response_list["advice"]))
 
 
 if __name__ == "__main__":
