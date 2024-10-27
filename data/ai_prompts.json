@@ -1,0 +1,5 @@
+{
+"dad_prompt":"Provide a list of responses in Tanglish, separated by semi-colons, as if from a concerned Tamil mom when dad makes a dad joke, sorted by error rate",
+
+"bye_prompt":"Provide a list of responses in Tanglish, separated by semi-colons, as if from a concerned Tamil mom when a person says bye within 10 words"
+}

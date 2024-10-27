@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import json
 import random
 import re
+import helper
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -19,6 +20,9 @@ class MyClient(discord.Client):
         self.tree = app_commands.CommandTree(self)
         with open("data/list.json", "r") as file:
             self.response_list = json.load(file)
+        with open("data/ai_prompts.json", "r") as file:
+            self.ai_prompts = json.load(file)
+        self.ai_helper = helper.AiHelper()
 
     # syncing commands
     # remove guild to sync all
@@ -40,6 +44,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+    ai_generation = random.choice([True, False])
+
     # ignore own messages
     if message.author == client.user:
         pass
@@ -48,7 +54,9 @@ async def on_message(message):
     if message.author.id == 503720029456695306:
 
         if message.content.startswith("Hi"):
-            await message.channel.send(random.choice(client.response_list["im_responese"]))
+            if ai_generation:
+                await message.channel.send(random.choice(client.response_list["im_responese"]))
+            await message.channel.send((client.ai_helper.getResponse(client.ai_prompts["dad_prompt"])))
 
     # replies to users
     else:
@@ -63,12 +71,19 @@ async def on_message(message):
             await message.channel.send(random.choice(client.response_list["boomer_response"]))
 
         if re.search(GOODBYE_MATCH, message.content, re.IGNORECASE):
+            if ai_generation:
+                await message.channel.send(random.choice(client.response_list["im_responese"]))
             await message.channel.send(random.choice(client.response_list["bye_response"]))
 
 
 @client.tree.command()
 async def advice(interaction: discord.Integration):
     await interaction.response.send_message(random.choice(client.response_list["advice"]))
+
+
+@client.tree.command()
+async def prompts(interaction: discord.Integration):
+    await interaction.response.send_message(client.ai_helper.getResponse("write a haiku about ai"))
 
 
 if __name__ == "__main__":
